@@ -22,7 +22,6 @@
   <div id="content_div">
     <h1>Welcome to CSCI 6040</h1>
     <h2>Dashboard Under-contstruction</h2>
-    <h3>User: <?php echo $_SESSION['user_name']; ?> 	| Email: <?php echo $_SESSION['user_email'];?></h3>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
       No content present yet!
       <input type="submit" id="submit_btn" name="log_out_btn" value="Log Out">
