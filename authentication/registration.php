@@ -1,19 +1,26 @@
 <?php
-  require "db_connection.php";
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  session_start();
+  require "db_connection.php";
+  if(isset($_SESSION['user_id']))
+    {
+      header("Location: dashboard.php");
+      exit();
+    } 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $hashed_password= md5($password);
     $stmt = $con->prepare("INSERT INTO users (name, email, password) 	VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $name, $email, $password);
+    $stmt->bind_param("sss", $name, $email, $hashed_password);
     
     if ($stmt->execute()) {
       echo "
       <script>
         alert('New user added successfully! Please Log In');
-        document.location = 'index.php';
+        document.location = 'login.php';
       </script>";
     } else {
       echo "Error: " . $stmt->error;
@@ -26,7 +33,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CSCI 4060</title>
+  <title>CSCI 6040</title>
   <link rel="stylesheet" href="custom_style.css">
 </head>
 <body>

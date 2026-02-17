@@ -1,9 +1,21 @@
 <?php
   session_start();
-  if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
+  if(!isset($_SESSION['user_id'])){
+    header("Location: login.php");
     exit();
-}
+  }
+
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if($_POST['log_out_btn']){
+      
+    session_unset();
+    session_destroy();
+      // Redirect to the login page
+      header("Location: login.php");
+      exit();
+    }
+  }
 ?>
 
 
